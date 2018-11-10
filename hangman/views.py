@@ -77,12 +77,13 @@ def vote(request):
     id = request.POST['question_id']
     question = Question.objects.get(id=id)
 
-    if request.POST['vote']:
+    if request.POST['vote'] and not 'voted' in request.session:
+        request.session['voted'] = True
         question.point += 1
         author = question.author
         author.point += 1
-    question.save()
-    author.save()
+        question.save()
+        author.save()
 
     return render(request, 'hangman/index.html')
 
@@ -153,13 +154,17 @@ def create(request):
 
     if len(correct) >= 5 and len(correct) <= 10 and not(re.match('[^a-z]', correct)):
         name = request.POST['name']
-        author = Author.objects.filter(name=name).first()
-        question = Question()
-        question.author = author
-        question.correct = correct
-        question.save()
-        author.num_questions += 1
-        author.save()
+        if Question.objects.filter(correct=correct).first():
+            params['msg'] = "その問題は既に作られています。"
+        else:
+            params['msg'] = "登録が完了しました。"
+            author = Author.objects.filter(name=name).first()
+            question = Question()
+            question.author = author
+            question.correct = correct
+            question.save()
+            author.num_questions += 1
+            author.save()
         return render(request, 'hangman/create_complete.html', params)
     
     else:
