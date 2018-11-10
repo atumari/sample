@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>HangMan</title>
+    <link rel="stylesheet" type="text/css"
+        href="{% static 'hangman/css/style_create.css' %}" />
+</head>
+<body bgcolor=#000055>
+    <h1>HangMan</h1>
+    <hr>
+
+    <p>問題はアルファベット5~10文字で入力できます。</p>
+    
+    <form action="{% url 'create' %}" method="post">
+        {% csrf_token %}
+        {{questionform.as_p}}
+        {{authorform.name.as_hidden}}
+        {{authorform.password.as_hidden}}
+        <p><input type="submit" value="作成"></p>
+    </form>
+    <p>{{msg}}</p>
+    <p><a href="{% url 'index' %}">トップに戻る</a></p>
+
+</body>
+</html>

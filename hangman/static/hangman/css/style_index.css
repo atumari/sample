@@ -1,0 +1,50 @@
+body {
+    color:gray;
+    font-size:16pt;
+}
+
+h1 {
+    color:rgb(146, 7, 30);
+    opacity:1;
+    font-size: 90pt;
+    margin-top: -20px;
+    margin-bottom: 0px;
+    text-align: right;
+}
+
+P {
+    margin:35px;
+}
+
+a {
+    color: rgb(31, 235, 208);
+    font-size: 30pt;
+    text-decoration: none;
+}
+
+pre {
+    color:rgb(225, 0, 0);
+    opacity:1.;
+    font-size: 60pt;
+    font-weight: bold;
+    text-align: left;
+}
+table {
+    margin:10px;
+    font-size: 14pt;
+}
+
+table tr th{
+    background-color: #009;
+    color: white;
+    padding: 2px 10px;
+    border-width:2px;
+}
+
+table tr td {
+    background-color: #eee;
+    color: #666;
+    padding: 2px 10px;
+    border-width:2px;
+}
+

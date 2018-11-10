@@ -1,0 +1,34 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>HangMan</title>
+    <link rel="stylesheet" type="text/css"
+        href="{% static 'hangman/css/style_play.css' %}" />
+</head>
+<body bgcolor=#000055>
+    <h1>HangMan</h1>
+    <hr>
+    <div style="position:absolute; top:100px; left:450px;">
+    <pre>
+{{hangman}}
+    </pre>
+    </div>
+
+    <p>{{string}}</p>
+    
+    <h3>
+        クリア<br>
+        おめでとう！
+    </h3>
+
+    <p><a href="{% url 'index' %}">トップに戻る</a></p>
+    <form action="{% url 'vote' %}" method="post">
+            {% csrf_token %}
+            {{voteform}}
+            {{form.question_id.as_hidden}}
+            <input type="submit" value="投票する">
+    </form>
+</body>
+</html>

@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>HangMan</title>
+    <link rel="stylesheet" type="text/css"
+        href="{% static 'hangman/css/style_create.css' %}" />
+</head>
+<body bgcolor=#000055>
+    <h1>HangMan</h1>
+    <hr>
+
+    <p>新規登録</p>
+    
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+        
+        {{form.as_p}}
+
+        <p><input type="submit" value="登録"></p>
+    </form>
+    <p>{{msg}}</p>
+    <p><a href="{% url 'index' %}">トップに戻る</a></p>
+
+</body>
+</html>
