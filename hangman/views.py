@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.paginator import Paginator
 
 from . models import Author, Question
@@ -77,15 +77,16 @@ def vote(request):
     id = request.POST['question_id']
     question = Question.objects.get(id=id)
 
-    if request.POST['vote'] and not 'voted' in request.session:
-        request.session['voted'] = True
+    #if request.POST['vote'] and not 'voted' in request.session:
+    if 'vote' in request.POST:
+        #request.session['voted'] = True
         question.point += 1
         author = question.author
         author.point += 1
         question.save()
         author.save()
 
-    return render(request, 'hangman/index.html')
+    return redirect(to='index')
 
 
 def admin(request):
